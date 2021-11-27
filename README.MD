@@ -19,3 +19,15 @@ Running `main.py` basically does the following:
 Please carefully read `main.py` to check out where you need to insert your credentials & configurations.
 Optionally, you can also read the docs of the classes & methods of tha `akadressen` package.
 Note that not all methods & classes have elaborate documentation, but all user facing ones do.
+
+## How tow run it?
+
+* You'll need Python 3.9+
+* You'll need to install the requirements of listed in `requirements.txt`, probably via
+  ```shell
+  $ pip install -r requirements.txt
+  ```
+* Then, after inserting your credentials & configs, just run 
+  ```shell
+  $ python main.py
+  ```
