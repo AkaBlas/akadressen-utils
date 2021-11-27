@@ -1,0 +1,5 @@
+httpx==0.21.1
+vobject==0.9.6.1
+pyrogram==1.2.9
+camelot-py[base]==0.10.1
+python-dateutil==2.8.2

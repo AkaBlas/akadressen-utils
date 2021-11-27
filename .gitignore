@@ -1,0 +1,4 @@
+*.session
+vcards/
+.mypy_cache/
+.idea/
