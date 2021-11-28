@@ -8,6 +8,7 @@ from httpx import Timeout, Limits
 from akadressen import (
     NCAddressBook,
     add_telegram_profile_pictures_to_vcards,
+    add_whatsapp_profile_pictures_to_vcards,
     merge_vcards,
     get_akadressen_vcards,
 )
@@ -57,6 +58,9 @@ async def main() -> None:
             vcards=aka_vcards,
             session_name="telegram",
         )
+
+        # Optionally, add profile pictures from WhatsApp
+        add_whatsapp_profile_pictures_to_vcards(aka_vcards, "web.whatsapp.com.har")
 
         # Merge AkaDressen into existing contacts
         merge_vcards(

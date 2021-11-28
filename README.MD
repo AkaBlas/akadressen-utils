@@ -9,6 +9,7 @@ Running `main.py` basically does the following:
 1. Download all contacts that already exist in the address book
 2. Download the AkaDressen and parse them into vCards
 3. Optionally look up the phone numbers and get the corresponding profile pictures from Telegram
+3. Optionally look up the phone numbers and get the corresponding profile pictures from WhatsApp (see below)
 4. Merge the vCards generated from the AkaDressen into the existing ones. A few notes on this:
    1. Existing data is never overwritten - at most, it's appended
    2. vCards are tricky and this is as best effort solution. You may need to manually tweak the result
@@ -31,3 +32,19 @@ Note that not all methods & classes have elaborate documentation, but all user f
   ```shell
   $ python main.py
   ```
+
+## A note on profile pictures
+
+Telegram has an open API so that you can get all your contacts profile pictures programmatically.
+So this part is easy.
+
+WhatsApp doesn't have such a functionality - there is an API, but it's only for business customers.
+What we *can* do is to snatch the profile pictures when they are loaded to be shown to you.
+Here is how it's done:
+
+1. Opening web.whatsapp.com
+2. Opening the dev tools of your browser and switching to the network tab
+3. Scrolling through all your contacts & member lists of the relevant groups
+4. Exporting the network log as HAR file
+
+From this file, we can extract the profile pictures.

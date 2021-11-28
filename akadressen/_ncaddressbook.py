@@ -106,7 +106,7 @@ class NCAddressBook:
         element = ET.XML(xml_data)
 
         for entry in element.iter():  # pylint: disable=too-many-nested-blocks
-            if entry.tag == namespace + "entry":
+            if entry.tag in [namespace + "entry", namespace + "response"]:
                 uid = ""
                 etag = ""
                 insert = False
