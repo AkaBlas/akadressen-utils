@@ -96,7 +96,11 @@ def _merge_vcard(
     if not base_contents.get("nickname") and (nickname := contents.get("nickname")):
         _add_element_or_list(vcard, nickname)
     if not base_contents.get("bday") and (b_day := contents.get("bday")):
-        vcard.add(b_day)
+        if isinstance(b_day, list):
+            # For some reason, contents.get returns a list of bdays
+            vcard.add(b_day[0])
+        else:
+            vcard.add(b_day)
     if not base_contents.get("photo") and (photo := contents.get("photo")):
         vcard.add(photo[0])
 

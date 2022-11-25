@@ -2,9 +2,7 @@
 """A module containing functionality to retrieve profile pictures from Telegram based on the
 phone number. """
 import asyncio
-import os
 from logging import getLogger
-from tempfile import NamedTemporaryFile
 from typing import Union, Sequence
 
 import vobject.base
@@ -15,25 +13,25 @@ _logger = getLogger(__name__)
 
 
 async def _add_photo_to_vcard(
-    vcard: vobject.base.Component, photo_id: str, client: Client, progress_logger: ProgressLogger
+    vcard: vobject.base.Component,
+    photo_id: str,
+    client: Client,
+    progress_logger: ProgressLogger,
+    semaphore: asyncio.Semaphore,
 ) -> None:
-    if vcard.contents.get("photo"):
-        return
+    async with semaphore:
+        if vcard.contents.get("photo"):
+            return
 
-    # Apparently pyrogram has no functionality to download directly to bytes
-    with NamedTemporaryFile(delete=False) as file:
-        await client.download_media(photo_id, file_name=file.name)
-        file.seek(0)
+        # Apparently pyrogram has no functionality to download directly to bytes
+        file_like = await client.download_media(photo_id, in_memory=True)
 
         photo = vcard.add("photo")
         photo.encoding_param = "B"
         photo.type_param = "JPG"
-        photo.value = file.read()
+        photo.value = file_like.read()
 
-        file.close()
-        os.unlink(file.name)
-
-    progress_logger.log()
+        progress_logger.log()
 
 
 async def add_telegram_profile_pictures_to_vcards(
@@ -92,9 +90,16 @@ async def add_telegram_profile_pictures_to_vcards(
             message="Downloaded %d of %d found photos.",
         )
         if tasks:
+            photo_download_semaphore = asyncio.Semaphore(5)
             await asyncio.gather(
                 *(
-                    _add_photo_to_vcard(vcard, photo_id, client, progress_logger)
+                    _add_photo_to_vcard(
+                        vcard,
+                        photo_id,
+                        client,
+                        progress_logger,
+                        semaphore=photo_download_semaphore,
+                    )
                     for vcard, photo_id in tasks
                 )
             )

@@ -48,3 +48,5 @@ Here is how it's done:
 4. Exporting the network log as HAR file
 
 From this file, we can extract the profile pictures.
+
+Update 11/2022: WhatsApp no longer mentions the phone number of in the profile picture URL. I have not yet found another way to get the profile picture. If you have any ideas, please let me know.
