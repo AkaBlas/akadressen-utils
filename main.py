@@ -3,14 +3,14 @@
 import asyncio
 import logging
 
-from httpx import Timeout, Limits
+from httpx import Limits, Timeout
 
 from akadressen import (
     NCAddressBook,
     add_telegram_profile_pictures_to_vcards,
     add_whatsapp_profile_pictures_to_vcards,
-    merge_vcards,
     get_akadressen_vcards,
+    merge_vcards,
 )
 
 handler = logging.StreamHandler()

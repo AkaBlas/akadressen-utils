@@ -5,11 +5,11 @@ AkaDressen.
 from collections.abc import Sequence
 from logging import getLogger
 from pathlib import Path
-from typing import Union, Callable
+from typing import Callable, Union
 
 import vobject.base
 
-from akadressen._util import vcard_name_to_filename, ProgressLogger
+from akadressen._util import ProgressLogger, vcard_name_to_filename
 
 _logger = getLogger()
 

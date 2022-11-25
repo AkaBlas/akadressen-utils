@@ -12,15 +12,15 @@ import vobject
 from httpx import AsyncClient
 
 from akadressen._data_parsers import (
-    remove_whitespaces,
     expand_brunswick,
-    string_to_date,
-    phone_number,
-    year_from_date,
-    split_city_state,
     parse_full_street,
+    phone_number,
+    remove_whitespaces,
+    split_city_state,
+    string_to_date,
+    year_from_date,
 )
-from akadressen._util import check_response_status, string_to_instrument, ProgressLogger
+from akadressen._util import ProgressLogger, check_response_status, string_to_instrument
 
 _NAN = type(np.nan)
 _logger = getLogger(__name__)

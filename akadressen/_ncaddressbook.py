@@ -10,10 +10,10 @@ from urllib.parse import urljoin
 from xml.etree import ElementTree as ET
 
 import vobject
-from httpx import AsyncClient, Timeout, Limits
+from httpx import AsyncClient, Limits, Timeout
 from vobject.base import Component
 
-from akadressen._util import check_response_status, vcard_name_to_filename, ProgressLogger
+from akadressen._util import ProgressLogger, check_response_status, vcard_name_to_filename
 
 
 class NCAddressBook:

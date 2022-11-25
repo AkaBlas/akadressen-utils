@@ -3,11 +3,13 @@
 the phone number."""
 import base64
 import json
+from collections.abc import Sequence
 from logging import getLogger
 from pathlib import Path
-from typing import Union, Sequence
+from typing import Union
 
 import vobject.base
+
 from akadressen._util import ProgressLogger
 
 _logger = getLogger(__name__)

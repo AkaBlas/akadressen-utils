@@ -2,11 +2,13 @@
 """A module containing functionality to retrieve profile pictures from Telegram based on the
 phone number. """
 import asyncio
+from collections.abc import Sequence
 from logging import getLogger
-from typing import Union, Sequence
+from typing import BinaryIO, Union, cast
 
 import vobject.base
 from pyrogram import Client
+
 from akadressen._util import ProgressLogger
 
 _logger = getLogger(__name__)
@@ -25,6 +27,7 @@ async def _add_photo_to_vcard(
 
         # Apparently pyrogram has no functionality to download directly to bytes
         file_like = await client.download_media(photo_id, in_memory=True)
+        file_like = cast(BinaryIO, file_like)
 
         photo = vcard.add("photo")
         photo.encoding_param = "B"

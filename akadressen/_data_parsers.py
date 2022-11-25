@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # pylint: disable=missing-function-docstring
 """Module containing utility functionality to parse the data from the AkaDressen."""
+import datetime
+
 # Mostly copied from https://github.com/Bibo-Joshi/AkaNamen-Bot/blob/master/components/member.py
 import re
-import datetime
-from typing import Union, Optional, NamedTuple, overload
+from typing import NamedTuple, Optional, Union, overload
 
 import dateutil.parser
 
